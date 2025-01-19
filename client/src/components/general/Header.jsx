@@ -1,8 +1,8 @@
 import { Input } from "@/components/ui/input";
 import { Link, NavLink } from "react-router-dom";
-import appName from "@/constants/appName";
 import ProfileCard from "./ProfileCard";
 import { useState } from "react";
+import appName from "../../constants/appName";
 
 const Header = () => {
 
@@ -21,7 +21,7 @@ const Header = () => {
             width="24px"
             className="h-[24px] active:animate-spin"
           />
-          {/* Change appName from src/constants/appName.ts */}
+          {/* Change appName from src/constants/appName.js */}
           <span className="hidden sm:inline">{appName}</span>
         </Link>
         <div className="lg:h-20 h-[4.5rem] lg:py-5 pt-4 pb-[1rem] flex space-x-2 md:w-2/5">
@@ -41,7 +41,7 @@ const Header = () => {
           <NavLink to="/" className={({ isActive }) => (`${isActive ? "text-zinc-100" : ""} hover:text-zinc-100 cursor-pointer transition-colors`)}>
             Home
           </NavLink>
-          <NavLink to="#" className={({ isActive }) => (`${isActive ? "text-zinc-100" : ""} hover:text-zinc-100 cursor-pointer transition-colors`)}>
+          <NavLink to="/dashboard" className={({ isActive }) => (`${isActive ? "text-zinc-100" : ""} hover:text-zinc-100 cursor-pointer transition-colors`)}>
             Dashboard
           </NavLink>
           <div className="hidden lg:inline-block">

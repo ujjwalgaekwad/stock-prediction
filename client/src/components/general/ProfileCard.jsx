@@ -45,9 +45,9 @@ const ProfileCard = () => {
         />
       </PopoverTrigger>
       <PopoverContent
-        className="dark:bg-black dark:text-white dark:border-zinc-800 !w-64 space-y-1 p-2 mt-1"
+        className="bg-zinc-300 dark:bg-black dark:text-white dark:border-zinc-800 !w-64 space-y-1 p-2 mt-1"
       >
-        <div className="flex justify-start items-center select-none cursor-pointer px-3 py-3 bg-zinc-800/70 hover:bg-zinc-800 rounded-sm">
+        <div className="flex justify-start items-center select-none cursor-pointer px-3 py-3 dark:bg-zinc-800/70 dark:hover:bg-zinc-800 rounded-sm">
           <img
             className="rounded-full h-10 w-10 object-cover"
             src={profile.avatar}
@@ -102,7 +102,7 @@ const DialogContainer = ({ children, trigger, title, description, onClose = null
     <Dialog
       onOpenChange={(v) => onClose && onClose(v)}
     >
-      <DialogTrigger className="p-3 text-sm text-start bg-zinc-800/70 hover:bg-zinc-800 w-full rounded-sm cursor-pointer">
+      <DialogTrigger className="p-3 text-sm text-start bg-zinc-100/90 hover:bg-zinc-200 dark:bg-zinc-800/70 dark:hover:bg-zinc-800 w-full rounded-sm cursor-pointer">
         {trigger}
       </DialogTrigger>
       <DialogContent aria-hidden className="sm:max-w-96">

@@ -72,7 +72,7 @@ function FeedbackForm({ setIsOpen }) {
           rules={{ required: "Please select a type" }}
           render={({ field: { onChange, value } }) => (
             <Select defaultValue="bug-report" value={value} onValueChange={onChange}>
-              <SelectTrigger className="text-zinc-100 bg-zinc-800 border-zinc-800 sm:max-w-96">
+              <SelectTrigger className="sm:max-w-96 text-zinc-800 dark:text-zinc-100 bg-zinc-200 dark:bg-zinc-800 border-zinc-800">
                 <SelectValue placeholder="Select feedback type" />
               </SelectTrigger>
               <SelectContent
