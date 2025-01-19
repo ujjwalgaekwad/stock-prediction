@@ -5,16 +5,10 @@ import {
   InputOTPSeparator,
   InputOTPSlot,
 } from "@/components/ui/input-otp";
-import axios, { AxiosResponse } from "axios";
+import axios from "axios";
 import toast from "react-hot-toast";
 
-type EmailVerificationProps = {
-  email: string;
-  isOtpVerified?: boolean;
-  updateFields: (fields: Partial<EmailVerificationProps>) => void;
-};
-
-const EmailVerification = ({ email, updateFields }: EmailVerificationProps) => {
+const EmailVerification = ({ email, updateFields }) => {
   const [timeLeft, setTimeLeft] = useState(60);
   const [clientOtp, setClientOtp] = useState("");
   const [otp, setOtp] = useState("");
@@ -28,7 +22,7 @@ const EmailVerification = ({ email, updateFields }: EmailVerificationProps) => {
 
   const sendOtp = useCallback(async () => {
     try {
-      const mailResponse: AxiosResponse = await axios.post(
+      const mailResponse = await axios.post(
         `${import.meta.env.VITE_SERVER_API_URL}/users/send-otp`,
         { email: email },
         { withCredentials: true }

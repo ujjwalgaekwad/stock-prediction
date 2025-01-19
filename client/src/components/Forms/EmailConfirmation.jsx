@@ -1,14 +1,9 @@
 import { Input } from "../ui/input";
 
-type EmailSignupProps = {
-  email: string;
-  updateFields: (fields: Partial<EmailSignupProps>) => void;
-};
-
 const EmailConfirmation = ({
   email,
   updateFields,
-}: EmailSignupProps) => {
+}) => {
   return (
     <>
       <div className="w-full space-y-2">

@@ -9,7 +9,7 @@ import {
 import { Input } from "../ui/input";
 import { Controller, useForm } from "react-hook-form";
 import { useState } from "react";
-import axios, { AxiosError } from "axios";
+import axios from "axios";
 import toast from "react-hot-toast";
 import { handleAxiosError } from "@/utils/handlerAxiosError";
 import { useNavigate } from "react-router-dom";
@@ -17,18 +17,12 @@ import { Textarea } from "../ui/textarea";
 import { Button } from "../ui/button";
 import { Loader2 } from "lucide-react";
 
-type HandleFeedbackType = {
-  title: string
-  description: string;
-  type: "bug-report" | "suggest-feature";
-}
-
-function FeedbackForm({ setIsOpen }: { setIsOpen: (value: boolean) => void }) {
+function FeedbackForm({ setIsOpen }) {
 
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
-  const { control, handleSubmit, register } = useForm<HandleFeedbackType>({
+  const { control, handleSubmit, register } = useForm({
     defaultValues: {
       title: "",
       description: "",
@@ -36,7 +30,7 @@ function FeedbackForm({ setIsOpen }: { setIsOpen: (value: boolean) => void }) {
     }
   });
 
-  const handleFeedbackSubmit = async (data: HandleFeedbackType) => {
+  const handleFeedbackSubmit = async (data) => {
     try {
       setLoading(true);
 
@@ -58,7 +52,7 @@ function FeedbackForm({ setIsOpen }: { setIsOpen: (value: boolean) => void }) {
       }
 
     } catch (error) {
-      handleAxiosError(error as AxiosError, navigate);
+      handleAxiosError(error, navigate);
     } finally {
       setLoading(false);
       setIsOpen(false)

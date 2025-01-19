@@ -2,20 +2,19 @@ import { Outlet, useLocation, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { Toaster } from "react-hot-toast";
 import useProfileStore from "./store/profileStore";
-import axios, { AxiosError } from "axios";
+import axios from "axios";
 import { Header, HorizontalTabs, Loading } from "@/components/general";
 import { handleAxiosError } from "./utils/handlerAxiosError";
 import { initializeSocket } from "./utils/initializeSocket";
 import { syncRootTheme } from "./utils/themeMethods";
 
 const App = () => {
-
   const { setProfile, profile } = useProfileStore();
 
   const location = useLocation();
   const navigate = useNavigate();
 
-  const [loading, setLoading] = useState<boolean>(true);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const socket = initializeSocket(profile._id);
@@ -46,7 +45,7 @@ const App = () => {
           setProfile(currentUser.data.data);
         }
       } catch (error) {
-        handleAxiosError(error as AxiosError, navigate);
+        handleAxiosError(error, navigate);
       } finally {
         setLoading(false);
       }
@@ -56,11 +55,13 @@ const App = () => {
     // syncRootTheme(theme)
 
     // or just sync system preference with root element each time user visits the site
-    if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
-      syncRootTheme("dark")
+    if (
+      window.matchMedia &&
+      window.matchMedia("(prefers-color-scheme: dark)").matches
+    ) {
+      syncRootTheme("dark");
       // setTheme("dark");  // and then set that theme in profile state also
     }
-
   }, [navigate, setProfile]);
 
   const showBars =
@@ -86,8 +87,9 @@ const App = () => {
         <Outlet />
       </div>
       <div
-        className={`fixed z-30 bottom-0 px-0 dark:text-zinc-400 bg-black sm:!bg-transparent justify-center items-center flex w-screen h-16 ${showBars ? "hidden" : ""
-          } lg:hidden`}
+        className={`fixed z-30 bottom-0 px-0 dark:text-zinc-400 bg-black sm:!bg-transparent justify-center items-center flex w-screen h-16 ${
+          showBars ? "hidden" : ""
+        } lg:hidden`}
         style={{ paddingBottom: "env(safe-area-inset-bottom)" }}
       >
         <HorizontalTabs />

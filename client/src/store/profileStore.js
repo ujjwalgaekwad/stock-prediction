@@ -1,14 +1,6 @@
-import { User } from "@/lib/types";
 import { create } from "zustand";
 
-interface ProfileState {
-  profile: User;
-  setProfile: (profile: User) => void;
-  updateProfile: (updatedProfile: User) => void;
-  removeProfile: () => void;
-}
-
-const useProfileStore = create<ProfileState>((set) => ({
+const useProfileStore = create((set) => ({
   profile: {
     _id: "",
     username: "",
@@ -40,4 +32,3 @@ const useProfileStore = create<ProfileState>((set) => ({
 }));
 
 export default useProfileStore;
-export type { User };

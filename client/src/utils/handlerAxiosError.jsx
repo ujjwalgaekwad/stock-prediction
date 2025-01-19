@@ -1,11 +1,10 @@
-import axios, { AxiosError } from "axios";
+import axios from "axios";
 import toast from "react-hot-toast";
 import getErrorFromAxios from "./getErrorFromAxios";
-import { NavigateFunction } from "react-router-dom";
 
 export const handleAxiosError = async (
-  error: AxiosError,
-  navigate: NavigateFunction
+  error,
+  navigate
 ) => {
   const errorMsg = getErrorFromAxios(error);
 

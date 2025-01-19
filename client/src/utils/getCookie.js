@@ -1,4 +1,4 @@
-function getCookie(name: string): string | undefined {
+function getCookie(name){
   const cookieValue = document.cookie
     .split("; ")
     .find((row) => row.startsWith(name + "="))

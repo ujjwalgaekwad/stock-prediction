@@ -1,4 +1,4 @@
-function convertMongoDBDate(isoDate: string){
+function convertMongoDBDate(isoDate){
     const date = new Date(isoDate);
 
     // Extract the day, month, and year

@@ -10,7 +10,7 @@ import { FaInfoCircle } from "react-icons/fa";
 import { IoLogOut } from "react-icons/io5";
 import toast from "react-hot-toast";
 import { handleAxiosError } from "@/utils/handlerAxiosError";
-import axios, { AxiosError } from "axios";
+import axios from "axios";
 import { FaInbox } from "react-icons/fa6";
 import { useState } from "react";
 import DrawerMenu from "./DrawerMenu";
@@ -41,7 +41,7 @@ export default function HorizontalTabs() {
         navigate("/login");
       }
     } catch (error) {
-      handleAxiosError(error as AxiosError, navigate);
+      handleAxiosError(error, navigate);
     } finally {
       toast.dismiss(loaderId);
     }

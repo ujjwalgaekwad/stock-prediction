@@ -2,10 +2,10 @@ import useProfileStore from "@/store/profileStore";
 import toast from "react-hot-toast";
 import { Button } from "@/components/ui/button";
 import { handleAxiosError } from "@/utils/handlerAxiosError";
-import axios, { AxiosError } from "axios";
+import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { DialogTitle } from "@radix-ui/react-dialog";
-import { ReactNode, useState } from "react";
+import { useState } from "react";
 import FeedbackForm from "@/components/Forms/FeedbackForm";
 import { Dialog, DialogClose, DialogContent, DialogDescription, DialogHeader, DialogTrigger } from "@/components/ui/dialog";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
@@ -29,7 +29,7 @@ const ProfileCard = () => {
         navigate("/login");
       }
     } catch (error) {
-      handleAxiosError(error as AxiosError, navigate);
+      handleAxiosError(error, navigate);
     } finally {
       setIsOpen(false)
     }
@@ -97,13 +97,7 @@ const ProfileCard = () => {
 
 export default ProfileCard;
 
-const DialogContainer = ({ children, trigger, title, description, onClose = null }: {
-  children: ReactNode;
-  trigger: string;
-  title: string;
-  description: string
-  onClose?: ((value: boolean) => void) | null
-}) => {
+const DialogContainer = ({ children, trigger, title, description, onClose = null }) => {
   return (
     <Dialog
       onOpenChange={(v) => onClose && onClose(v)}

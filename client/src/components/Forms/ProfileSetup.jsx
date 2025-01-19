@@ -1,19 +1,11 @@
 import { Input } from "../ui/input";
 
-type ProfileSetupProps = {
-  firstName: string;
-  lastName: string;
-  username: string;
-  avatarImage?: File;
-  updateFields: (fields: Partial<ProfileSetupProps>) => void;
-};
-
 const ProfileSetup = ({
   firstName,
   lastName,
   username,
   updateFields,
-}: ProfileSetupProps) => {
+}) => {
   return (
     <>
       <div className="flex space-x-2">

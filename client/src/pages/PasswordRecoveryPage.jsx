@@ -1,48 +1,31 @@
-import axios, { AxiosError } from "axios";
-import useProfileStore from "../store/profileStore.js";
-import { Button } from "@/components/ui/button.js";
+import axios from "axios";
+import { Button } from "@/components/ui/button";
 import { Link, useNavigate } from "react-router-dom";
-import { FormEvent, useState } from "react";
+import { useState } from "react";
 import { Loader2 } from "lucide-react";
 import { Stepper } from "@/components/general";
 import { IoArrowBack } from "react-icons/io5";
 import { useMultistepForm } from "@/Hooks/useMultistepForm.js";
 import {
-  EmailSignup,
   EmailVerification,
-  ProfileSetup,
-} from "@/components/Forms/index.ts";
+  EmailConfirmation,
+  ConfirmPassword,
+} from "@/components/Forms/index.js";
 import toast from "react-hot-toast";
-import { handleAxiosError } from "@/utils/handlerAxiosError.js";
-import appName from "@/constants/appName.js";
-
-type SignupFormData = {
-  firstName: string;
-  lastName: string;
-  username: string;
-  email: string;
-  password: string;
-  confirmPassword: string;
-  avatarImage?: File;
-  isOtpVerified?: boolean;
-};
+import { handleAxiosError } from "@/utils/handlerAxiosError.jsx";
 
 const initialData = {
-  firstName: "",
-  lastName: "",
-  username: "",
   email: "",
   password: "",
   confirmPassword: "",
   isOtpVerified: false,
 };
 
-const SignupPage = () => {
-  const { setProfile } = useProfileStore();
+const PasswordRecoveryPage = () => {
   const [loading, setLoading] = useState(false);
-  const [data, setData] = useState<SignupFormData>(initialData);
+  const [data, setData] = useState(initialData);
 
-  const updateFields = (fields: Partial<SignupFormData>) => {
+  const updateFields = (fields) => {
     setData((prev) => ({ ...prev, ...fields }));
   };
 
@@ -50,7 +33,6 @@ const SignupPage = () => {
 
   const emailReg =
     /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/;
-  const usernameReg = /[a-zA-Z][a-zA-Z0-9-_]{3,32}/;
 
   const {
     steps,
@@ -62,9 +44,9 @@ const SignupPage = () => {
     back,
     goTo,
   } = useMultistepForm([
-    <EmailSignup {...data} updateFields={updateFields} />,
-    <ProfileSetup {...data} updateFields={updateFields} />,
+    <EmailConfirmation {...data} updateFields={updateFields} />,
     <EmailVerification {...data} updateFields={updateFields} />,
+    <ConfirmPassword {...data} updateFields={updateFields} />,
   ]);
 
   const userRegister = async () => {
@@ -78,27 +60,19 @@ const SignupPage = () => {
       const userCredentials = {
         password: data.password,
         email: "",
-        username: "",
-        fullName: data.lastName
-          ? data.firstName + " " + data.lastName
-          : data.firstName,
-        avatarImage: data.avatarImage,
       };
 
-      if (emailReg.test(data.email) && usernameReg.test(data.username)) {
+      if (emailReg.test(data.email)) {
         userCredentials.email = data.email;
-        userCredentials.username = data.username;
       } else {
-        toast.error("Invalid email or username");
+        toast.error("Invalid email");
         setLoading(false);
         return;
       }
 
       const response = await axios({
-        method: "POST",
-        url: `${import.meta.env.VITE_SERVER_API_URL}/users/register${
-          userCredentials.avatarImage != undefined ? "/avatar" : ""
-        }`,
+        method: "patch",
+        url: `${import.meta.env.VITE_SERVER_API_URL}/users/recover-password`,
         data: userCredentials,
         withCredentials: true,
         headers: {
@@ -109,20 +83,20 @@ const SignupPage = () => {
       });
 
       if (!response.data.success) {
-        toast.error("Failed to Register");
+        toast.error("Failed to Recover Password");
         return;
       }
 
-      setProfile(response.data.data);
-      navigate("/");
+      navigate("/login");
+      toast.success("Password recovered successfully");
     } catch (err) {
-      handleAxiosError(err as AxiosError, navigate);
+      handleAxiosError(err, navigate);
     } finally {
       setLoading(false);
     }
   };
 
-  const submitHandler = (e: FormEvent) => {
+  const submitHandler = (e) => {
     e.preventDefault();
     if (data.password !== data.confirmPassword) {
       toast.error("Passwords do not match");
@@ -142,7 +116,7 @@ const SignupPage = () => {
         <span className="absolute top-0 right-10 text-sm">
           {currentStepIndex + 1} / {steps.length}
         </span>
-        <h1 className="font-semibold text-4xl pt-5">Signup to {appName}</h1>
+        <h1 className="font-semibold text-4xl pt-5">Password recovery</h1>
         <form
           action="post"
           className="h-4/5 flex flex-col space-y-6 sm:w-96 w-72 justify-center items-center"
@@ -159,7 +133,7 @@ const SignupPage = () => {
               <span>Back</span>
             </Button>
           )}
-          {currentStepIndex === 2 && (
+          {currentStepIndex === 1 && (
             <p className="text-sm text-foreground/60 text-center">
               If the email address is incorrect,{" "}
               <span
@@ -183,13 +157,14 @@ const SignupPage = () => {
           ) : (
             <Button
               type="submit"
+              disabled={currentStepIndex === 1 && !data.isOtpVerified}
               className="bg-slate-800 text-white hover:bg-slate-700 w-full"
             >
-              {isLastStep ? "Create an Account" : "Next"}
+              {isLastStep ? "Change password" : "Next"}
             </Button>
           )}
           <p className="text-center">
-            Already have an account?{" "}
+            Go back to{" "}
             <Link
               to="/login"
               className="hover:underline text-blue-500 cursor-pointer"
@@ -203,4 +178,4 @@ const SignupPage = () => {
   );
 };
 
-export default SignupPage;
+export default PasswordRecoveryPage;

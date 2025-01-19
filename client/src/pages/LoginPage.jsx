@@ -1,7 +1,7 @@
-import axios, { AxiosError } from "axios";
+import axios from "axios";
 import useProfileStore from "../store/profileStore.js";
-import { Input } from "@/components/ui/input.js";
-import { Button } from "@/components/ui/button.js";
+import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
 import { Link, useNavigate } from "react-router-dom";
 import { IoMdEye } from "react-icons/io";
 import { IoMdEyeOff } from "react-icons/io";
@@ -17,7 +17,7 @@ const LoginPage = () => {
   const { setProfile } = useProfileStore();
   const [isPasswordShowing, setIsPasswordShowing] = useState(false);
   const [loading, setLoading] = useState(false);
-  const { register, handleSubmit } = useForm<LoginFormData>();
+  const { register, handleSubmit } = useForm();
   const [rememberMe, setRememberMe] = useState(false);
 
   const navigate = useNavigate();
@@ -26,10 +26,7 @@ const LoginPage = () => {
     /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/;
   const usernameReg = /[a-zA-Z][a-zA-Z0-9-_]{3,32}/;
 
-  const userLogin = async (data: {
-    text: string;
-    password: string;
-  }) => {
+  const userLogin = async (data) => {
     try {
       setLoading(true);
       const userCredentials = {
@@ -69,18 +66,13 @@ const LoginPage = () => {
       setProfile(response.data.data); navigate("/");
 
     } catch (err) {
-      const errorMsg = getErrorFromAxios(err as AxiosError);
+      const errorMsg = getErrorFromAxios(err);
       if (errorMsg !== undefined) {
         toast.error(errorMsg);
       }
     } finally {
       setLoading(false);
     }
-  };
-
-  type LoginFormData = {
-    text: string;
-    password: string;
   };
 
   return (

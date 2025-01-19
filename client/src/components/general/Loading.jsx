@@ -1,7 +1,7 @@
 import { Progress } from "@/components/ui/progress";
 import { useEffect, useState } from "react";
 
-const Loading = ({ isLoading }: { isLoading: boolean }) => {
+const Loading = ({ isLoading }) => {
 
   const [progress, setProgress] = useState(0)
 

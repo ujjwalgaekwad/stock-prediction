@@ -9,19 +9,7 @@ import {
 } from "@/components/ui/drawer";
 import { Button } from "@/components/ui/button";
 import { RxCross2 } from "react-icons/rx";
-import { ReactNode } from "react";
-import { Drawer as DrawerPrimitive } from "vaul"
 import { VisuallyHidden } from "@radix-ui/react-visually-hidden";
-
-type DrawerMenuProps = {
-  children: ReactNode;
-  trigger: ReactNode;
-  className?: string;
-  description?: string;
-  triggerClassNames?: string;
-  contentClassName?: string;
-  title?: string;
-} & React.ComponentProps<typeof DrawerPrimitive.Root>;
 
 export default function DrawerMenu({
   children,
@@ -32,7 +20,7 @@ export default function DrawerMenu({
   className = "",
   title,
   ...props
-}: DrawerMenuProps) {
+}) {
   return (
     <Drawer {...props}>
       <DrawerTrigger className={triggerClassNames} asChild>{trigger}</DrawerTrigger>

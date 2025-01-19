@@ -1,4 +1,4 @@
-const toggleThemeModeAtRootElem = (theme: "light" | "dark") => {
+const toggleThemeModeAtRootElem = (theme) => {
   const rootElem = document.getElementById("theme-root");
   rootElem?.classList.remove("dark", "light");
   rootElem?.classList.add(theme);
@@ -9,7 +9,7 @@ const getThemeModeAtRootElem = () =>
     ? "dark"
     : "light";
 
-const syncRootTheme = (theme: "light" | "dark") => {
+const syncRootTheme = (theme) => {
   if (getThemeModeAtRootElem() !== theme) {
     toggleThemeModeAtRootElem(theme)
   }
