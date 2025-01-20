@@ -6,7 +6,6 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { DialogTitle } from "@radix-ui/react-dialog";
 import { useState } from "react";
-import FeedbackForm from "@/components/Forms/FeedbackForm";
 import { Dialog, DialogClose, DialogContent, DialogDescription, DialogHeader, DialogTrigger } from "@/components/ui/dialog";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 
@@ -60,15 +59,6 @@ const ProfileCard = () => {
             </p>
           </div>
         </div>
-
-        <DialogContainer
-          onClose={(value) => (value !== true && setIsOpen(false))}
-          trigger="Feedback"
-          title="Feedback"
-          description="Report a bug or Suggest a feature."
-        >
-          <FeedbackForm setIsOpen={setIsOpen} />
-        </DialogContainer>
 
         <DialogContainer
           onClose={(value) => (value !== true && setIsOpen(false))}
