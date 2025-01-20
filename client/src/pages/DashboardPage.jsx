@@ -2,6 +2,7 @@ import React from "react";
 import useProfileStore from "../store/profileStore";
 import { MultiLineChart, SingleLineChart } from "../components/charts/index"; // Assuming these are pre-built components
 import { Separator } from "../components/ui/separator";
+import { MdArrowForwardIos } from "react-icons/md";
 
 const mockWatchlist = [
   { name: "Apple", price: 150, change: 1.2 },
@@ -66,10 +67,13 @@ function DashboardPage() {
         {/* Portfolio Overview */}
         <div className="mb-6">
           <h2 className="text-2xl font-semibold mb-4">Portfolio Overview</h2>
-          <div className="bg-zinc-200 dark:bg-zinc-800 p-6 rounded-lg shadow-lg">
+          <div className="relative group bg-zinc-200 dark:bg-zinc-800 border-1 cursor-pointer border-transparent hover:border-zinc-300 dark:hover:border-zinc-700 p-6 rounded-lg shadow-lg">
             <p className="text-xl">
               Total Portfolio Value: ${totalPortfolioValue}
             </p>
+            <div className="absolute opacity-0 group-hover:opacity-100 transition-opacity duration-200 right-8 top-0 h-full flex items-center">
+              <MdArrowForwardIos className="text-2xl text-zinc-700 dark:text-zinc-300" />
+            </div>
           </div>
         </div>
 
@@ -80,7 +84,7 @@ function DashboardPage() {
             {marketOverview.map((market) => (
               <div
                 key={market.index}
-                className="bg-zinc-200 dark:bg-zinc-800 p-4 rounded-lg shadow-lg hover:shadow-xl transition-shadow"
+                className="relative group bg-zinc-200 dark:bg-zinc-800 border-1 cursor-pointer border-transparent hover:border-zinc-300 dark:hover:border-zinc-700 p-4 rounded-lg shadow-lg hover:shadow-xl transition-shadow"
               >
                 <h3 className="text-xl">{market.index}</h3>
                 <p className="text-lg">${market.value}</p>
@@ -92,6 +96,9 @@ function DashboardPage() {
                   {market.change > 0 ? "+" : ""}
                   {market.change}%
                 </p>
+                <div className="absolute opacity-0 group-hover:opacity-100 transition-opacity duration-200 right-7 top-0 h-full flex items-center">
+                  <MdArrowForwardIos className="text-2xl text-zinc-700 dark:text-zinc-300" />
+                </div>
               </div>
             ))}
           </div>
@@ -104,7 +111,7 @@ function DashboardPage() {
             {mockWatchlist.map((stock) => (
               <div
                 key={stock.name}
-                className="bg-zinc-200 dark:bg-zinc-800 border-1 cursor-pointer border-transparent hover:border-zinc-600 dark:hover:border-zinc-500 p-4 rounded-lg shadow-lg hover:shadow-xl transition-shadow"
+                className="relative group bg-zinc-200 dark:bg-zinc-800 border-1 cursor-pointer border-transparent hover:border-zinc-300 dark:hover:border-zinc-700 p-4 rounded-lg shadow-lg hover:shadow-xl transition-shadow"
               >
                 <h3 className="text-xl">{stock.name}</h3>
                 <p className="text-lg">${stock.price}</p>
@@ -116,6 +123,9 @@ function DashboardPage() {
                   {stock.change > 0 ? "+" : ""}
                   {stock.change}%
                 </p>
+                <div className="absolute opacity-0 group-hover:opacity-100 transition-opacity duration-200 right-6 top-0 h-full flex items-center">
+                  <MdArrowForwardIos className="text-2xl text-zinc-700 dark:text-zinc-300" />
+                </div>
               </div>
             ))}
           </div>
@@ -152,8 +162,11 @@ function DashboardPage() {
         {/* Predictions Accuracy */}
         <div className="mb-6">
           <h2 className="text-2xl font-semibold mb-4">Predictions Accuracy</h2>
-          <div className="bg-zinc-200 dark:bg-zinc-800 p-6 rounded-lg shadow-lg">
-            <p className="text-xl">Prediction Accuracy: 85%</p>
+          <div className="group bg-zinc-200 dark:bg-zinc-800 p-6 rounded-lg shadow-lg">
+            <div className="flex justify-center items-center w-fit space-x-2">
+              <p className="text-xl">Prediction Accuracy: 85%</p>
+              {/* <MdArrowForwardIos className="text-lg text-zinc-700 dark:text-zinc-300 opacity-0 group-hover:opacity-100 transition-opacity duration-200" /> */}
+            </div>
             <div className="w-full bg-zinc-300 dark:bg-zinc-600 rounded-full h-2 mt-2">
               <div
                 className="bg-green-500 h-2 rounded-full"
