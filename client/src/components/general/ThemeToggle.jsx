@@ -1,5 +1,4 @@
 import React from "react";
-import { Button } from "../ui/button";
 import { Moon, Sun } from "lucide-react";
 import useProfileStore from "../../store/profileStore";
 import { syncRootTheme } from "../../utils/themeMethods";
@@ -14,8 +13,7 @@ const ThemeToggle = () => {
   };
 
   return (
-    <Button
-      variant={"mode"}
+    <button
       onClick={toggleTheme}
       className="p-2 border-none bg-primary-light dark:bg-primary-dark text-white transition"
     >
@@ -24,7 +22,7 @@ const ThemeToggle = () => {
       ) : (
         <Sun size={22} strokeWidth={1.5} />
       )}
-    </Button>
+    </button>
   );
 };
 
