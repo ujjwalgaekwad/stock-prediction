@@ -48,12 +48,12 @@ const Header = () => {
             Home
           </NavLink>
           <NavLink
-            to="/dashboard"
+            to="/whishlist"
             className={({ isActive }) =>
               `${isActive ? "text-zinc-900 dark:text-zinc-100" : "hover:text-zinc-900 dark:hover:text-zinc-100"} cursor-pointer transition-colors`
             }
           >
-            Dashboard
+            Whishlist
           </NavLink>
           <ThemeToggler />
           <div className="hidden lg:inline-block">

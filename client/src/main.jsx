@@ -10,7 +10,7 @@ import LoginPage from "./pages/LoginPage.jsx";
 import SignupPage from "./pages/SignupPage.jsx";
 import PasswordRecoveryPage from "./pages/PasswordRecoveryPage.jsx";
 import NotFound from "./pages/NotFound.jsx";
-import DashboardPage from "./pages/DashboardPage.jsx";
+import WhishlistPage from "./pages/WhishlistPage.jsx";
 
 // router
 const router = createBrowserRouter([
@@ -23,8 +23,8 @@ const router = createBrowserRouter([
         element: <HomePage />,
       },
       {
-        path: "dashboard",
-        element: <DashboardPage />,
+        path: "/whishlist",
+        element: <WhishlistPage />,
       },
       {
         path: "/login",
