@@ -11,6 +11,7 @@ import SignupPage from "./pages/SignupPage.jsx";
 import PasswordRecoveryPage from "./pages/PasswordRecoveryPage.jsx";
 import NotFound from "./pages/NotFound.jsx";
 import WhishlistPage from "./pages/WhishlistPage.jsx";
+import StockDetailsPage from "./pages/StockDetailsPage.jsx";
 
 // router
 const router = createBrowserRouter([
@@ -25,6 +26,10 @@ const router = createBrowserRouter([
       {
         path: "/whishlist",
         element: <WhishlistPage />,
+      },
+      {
+        path: "/stocks/:stockId",
+        element: <StockDetailsPage />,
       },
       {
         path: "/login",

@@ -65,7 +65,6 @@ function HomePage() {
     (async () => {
       try {
         setLoading(true);
-        console.log(import.meta.env.VITE_SERVER_API_URL)
         const res = await axios.get(
           `${import.meta.env.VITE_SERVER_API_URL}/whishlist/get`,
           { withCredentials: true }
