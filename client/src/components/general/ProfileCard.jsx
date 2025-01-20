@@ -47,7 +47,7 @@ const ProfileCard = () => {
       <PopoverContent
         className="bg-zinc-300 dark:bg-black dark:text-white dark:border-zinc-800 !w-64 space-y-1 p-2 mt-1"
       >
-        <div className="flex justify-start items-center select-none cursor-pointer px-3 py-3 dark:bg-zinc-800/70 dark:hover:bg-zinc-800 rounded-sm">
+        <div className="flex justify-start items-center select-none cursor-pointer px-3 py-3 bg-zinc-100/90 hover:bg-zinc-200 dark:bg-zinc-800/70 dark:hover:bg-zinc-800 rounded-sm">
           <img
             className="rounded-full h-10 w-10 object-cover"
             src={profile.avatar}

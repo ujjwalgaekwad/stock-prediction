@@ -74,12 +74,12 @@ const App = () => {
   }
 
   return (
-    <div className="min-h-screen w-screen">
+    <div className="min-h-screen w-screen text-zinc-900 dark:text-zinc-100 bg-zinc-200 dark:bg-zinc-900">
       <div
-        className={`p-0 w-full min-h-[calc(100vh-env(safe-area-inset-top))] bg-black`}
+        className={`p-0 w-full min-h-[calc(100vh-env(safe-area-inset-top))]`}
       >
         <div
-          className={`w-full bg-black ${showBars ? "hidden" : ""}`}
+          className={`w-full ${showBars ? "hidden" : ""}`}
           style={{ paddingTop: "env(safe-area-inset-top)" }}
         >
           <Header />
@@ -87,7 +87,7 @@ const App = () => {
         <Outlet />
       </div>
       <div
-        className={`fixed z-30 bottom-0 px-0 dark:text-zinc-400 bg-black sm:!bg-transparent justify-center items-center flex w-screen h-16 ${
+        className={`fixed z-30 bottom-0 px-0 dark:text-zinc-400 sm:!bg-transparent justify-center items-center flex w-screen h-16 ${
           showBars ? "hidden" : ""
         } lg:hidden`}
         style={{ paddingBottom: "env(safe-area-inset-bottom)" }}
