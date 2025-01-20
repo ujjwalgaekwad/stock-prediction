@@ -66,7 +66,7 @@ function DashboardPage() {
         {/* Portfolio Overview */}
         <div className="mb-6">
           <h2 className="text-2xl font-semibold mb-4">Portfolio Overview</h2>
-          <div className="bg-white dark:bg-zinc-800 p-6 rounded-lg shadow-lg">
+          <div className="bg-zinc-200 dark:bg-zinc-800 p-6 rounded-lg shadow-lg">
             <p className="text-xl">
               Total Portfolio Value: ${totalPortfolioValue}
             </p>
@@ -80,7 +80,7 @@ function DashboardPage() {
             {marketOverview.map((market) => (
               <div
                 key={market.index}
-                className="bg-white dark:bg-zinc-800 p-4 rounded-lg shadow-lg hover:shadow-xl transition-shadow"
+                className="bg-zinc-200 dark:bg-zinc-800 p-4 rounded-lg shadow-lg hover:shadow-xl transition-shadow"
               >
                 <h3 className="text-xl">{market.index}</h3>
                 <p className="text-lg">${market.value}</p>
@@ -104,7 +104,7 @@ function DashboardPage() {
             {mockWatchlist.map((stock) => (
               <div
                 key={stock.name}
-                className="bg-white dark:bg-zinc-800 p-4 rounded-lg shadow-lg hover:shadow-xl transition-shadow"
+                className="bg-zinc-200 dark:bg-zinc-800 border-1 cursor-pointer border-transparent hover:border-zinc-600 dark:hover:border-zinc-500 p-4 rounded-lg shadow-lg hover:shadow-xl transition-shadow"
               >
                 <h3 className="text-xl">{stock.name}</h3>
                 <p className="text-lg">${stock.price}</p>
@@ -130,7 +130,7 @@ function DashboardPage() {
             defaultCard
             title="Adani vs Tata Motors vs Balaji Wafers"
             dataKeys={["adani", "tataMotors", "balaji"]}
-            className="bg-zinc-300 text-zinc-900 dark:bg-slate-950 dark:text-zinc-100 rounded-lg shadow overflow-hidden"
+            className="bg-zinc-200 text-zinc-900 dark:bg-slate-950 dark:text-zinc-100 rounded-lg shadow overflow-hidden"
           />
         </div>
         <Separator className="my-8" />
@@ -145,14 +145,14 @@ function DashboardPage() {
             chartData={mockHistoricalData}
             title="Apple Stock Performance"
             dataKey="apple"
-            className="bg-zinc-300 text-zinc-900 dark:bg-slate-950 dark:text-zinc-100 rounded-lg shadow overflow-hidden"
+            className="bg-zinc-200 text-zinc-900 dark:bg-slate-950 dark:text-zinc-100 rounded-lg shadow overflow-hidden"
           />
         </div>
 
         {/* Predictions Accuracy */}
         <div className="mb-6">
           <h2 className="text-2xl font-semibold mb-4">Predictions Accuracy</h2>
-          <div className="bg-white dark:bg-zinc-800 p-6 rounded-lg shadow-lg">
+          <div className="bg-zinc-200 dark:bg-zinc-800 p-6 rounded-lg shadow-lg">
             <p className="text-xl">Prediction Accuracy: 85%</p>
             <div className="w-full bg-zinc-300 dark:bg-zinc-600 rounded-full h-2 mt-2">
               <div

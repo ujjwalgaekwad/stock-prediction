@@ -10,7 +10,7 @@ const Header = () => {
 
   return (
     <>
-      <nav className="lg:h-[4.5rem] z-50 fixed top-0 w-full bg-zinc-200 dark:bg-zinc-900 h-16 lg:py-5 pt-4 pb-[1rem] flex justify-between items-center space-x-2 px-5 lg:px-20 border-b-[1px] border-zinc-300 dark:border-zinc-700 select-none">
+      <nav className="lg:h-[4.5rem] z-50 fixed top-0 w-full bg-zinc-100 dark:bg-zinc-900 h-16 lg:py-5 pt-4 pb-[1rem] flex justify-between items-center space-x-2 px-5 lg:px-20 border-b-[1px] border-zinc-300 dark:border-zinc-700 select-none">
         <Link
           to="/"
           className="text-zinc-700 hover:text-zinc-900 dark:text-zinc-300 dark:hover:text-white transition-colors cursor-pointer text-2xl font-helvetica font-semibold flex space-x-2 justify-center items-center"
@@ -31,9 +31,9 @@ const Header = () => {
               onChange={(e) => setSearch(e.target.value)}
               placeholder="Search something..."
               defaultStyling={false}
-              className="bg-zinc-300 text-zinc-900 dark:bg-zinc-800 dark:text-zinc-100"
+              className="bg-zinc-200 text-zinc-900 dark:bg-zinc-800 dark:text-zinc-100"
             />
-            <div className="absolute top-2 right-2 border-1 text-zinc-900 bg-zinc-300 border-zinc-400 dark:bg-zinc-900 dark:border-zinc-800 dark:text-zinc-300 w-fit py-1 px-2 text-xs rounded-md">
+            <div className="absolute top-2 right-2 border-1 text-zinc-900 bg-zinc-200 border-zinc-400 dark:bg-zinc-900 dark:border-zinc-800 dark:text-zinc-300 w-fit py-1 px-2 text-xs rounded-md">
               ⌘K
             </div>
           </div>
