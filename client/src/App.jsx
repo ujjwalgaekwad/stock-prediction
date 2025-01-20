@@ -9,7 +9,7 @@ import { initializeSocket } from "./utils/initializeSocket";
 import { syncRootTheme } from "./utils/themeMethods";
 
 const App = () => {
-  const { setProfile, profile } = useProfileStore();
+  const { setProfile, profile, setTheme } = useProfileStore();
 
   const location = useLocation();
   const navigate = useNavigate();
@@ -60,9 +60,9 @@ const App = () => {
       window.matchMedia("(prefers-color-scheme: dark)").matches
     ) {
       syncRootTheme("dark");
-      // setTheme("dark");  // and then set that theme in profile state also
+      setTheme("dark");  // and then set that theme in profile state also
     }
-  }, [navigate, setProfile]);
+  }, [navigate, setProfile, setTheme]);
 
   const showBars =
     location.pathname.includes("/login") ||

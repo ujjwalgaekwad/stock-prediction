@@ -11,7 +11,6 @@ import SignupPage from "./pages/SignupPage.jsx";
 import PasswordRecoveryPage from "./pages/PasswordRecoveryPage.jsx";
 import NotFound from "./pages/NotFound.jsx";
 import Dashboard from "./pages/Dashboard.jsx";
-import { ThemeProvider } from "./context/ThemeContext.jsx";
 
 // router
 const router = createBrowserRouter([
@@ -49,8 +48,6 @@ const router = createBrowserRouter([
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    <ThemeProvider>
-      <RouterProvider router={router} />
-    </ThemeProvider>
+    <RouterProvider router={router} />
   </React.StrictMode>
 );
