@@ -1,7 +1,7 @@
-import SIngleLineChartComponent from "./SingleLineChart";
-import DoubleLineChartComponent from "./DoubleLineChart";
+import SingleLineChart from "./SingleLineChart";
+import MultiLineChart from "./MultiLineChart";
 
 export {
-  SIngleLineChartComponent,
-  DoubleLineChartComponent,
+  SingleLineChart,
+  MultiLineChart,
 }

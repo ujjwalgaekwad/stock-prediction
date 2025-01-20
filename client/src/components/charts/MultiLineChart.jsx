@@ -17,10 +17,10 @@ import {
   ChartTooltipContent,
 } from "@/components/ui/chart";
 
-function SingleLineChartComponent({
+function MultiLineChartComponent({
   chartConfig,
   chartData,
-  dataKey = "desktop", // Default to "desktop", but can be changed dynamically
+  dataKeys = ["desktop", "mobile"], // Default to showing desktop and mobile data
   defaultCard = false,
   title = "Define a title",
   description = "",
@@ -37,7 +37,7 @@ function SingleLineChartComponent({
           <CardContent>
             <ChartContainer config={chartConfig}>
               <LineChart
-                aria-label="Line chart showing traffic data over time"
+                accessibilityLayer
                 data={chartData}
                 margin={{
                   left: 12,
@@ -54,32 +54,40 @@ function SingleLineChartComponent({
                 />
                 <ChartTooltip
                   cursor={false}
-                  content={<ChartTooltipContent hideLabel />}
+                  content={<ChartTooltipContent />}
                 />
-                <Line
-                  dataKey={dataKey} // Dynamically using the dataKey (desktop or mobile)
-                  type="monotone"
-                  stroke={chartConfig[dataKey]?.color || "black"} // Dynamically using the stroke color
-                  strokeWidth={2}
-                  dot={false}
-                  aria-label={`${dataKey} traffic data`}
-                />
+                {/* Loop through dataKeys to dynamically add lines */}
+                {dataKeys.map((dataKey) => (
+                  <Line
+                    key={dataKey}
+                    dataKey={dataKey}
+                    type="monotone"
+                    stroke={chartConfig[dataKey]?.color || "black"} // Dynamically use color from config
+                    strokeWidth={2}
+                    dot={false}
+                  />
+                ))}
               </LineChart>
             </ChartContainer>
           </CardContent>
-          <CardFooter className="flex-col items-start gap-2 text-sm">
-            <div className="flex gap-2 font-medium leading-none">
-              Trending up by 5.2% this month <TrendingUp className="h-4 w-4" />
-            </div>
-            <div className="leading-none text-muted-foreground">
-              Showing total visitors for the last 6 months
+          <CardFooter>
+            <div className="flex w-full items-start gap-2 text-sm">
+              <div className="grid gap-2">
+                <div className="flex items-center gap-2 font-medium leading-none">
+                  Trending up by 5.2% this month{" "}
+                  <TrendingUp className="h-4 w-4" />
+                </div>
+                <div className="flex items-center gap-2 leading-none text-muted-foreground">
+                  Showing total visitors for the last 6 months
+                </div>
+              </div>
             </div>
           </CardFooter>
         </Card>
       ) : (
         <ChartContainer config={chartConfig}>
           <LineChart
-            aria-label="Line chart showing traffic data over time"
+            accessibilityLayer
             data={chartData}
             margin={{
               left: 12,
@@ -94,18 +102,18 @@ function SingleLineChartComponent({
               tickMargin={8}
               tickFormatter={(value) => value.slice(0, 3)}
             />
-            <ChartTooltip
-              cursor={false}
-              content={<ChartTooltipContent hideLabel />}
-            />
-            <Line
-              dataKey={dataKey} // Dynamically using the dataKey (desktop or mobile)
-              type="monotone"
-              stroke={chartConfig[dataKey]?.color || "black"} // Dynamically using the stroke color
-              strokeWidth={2}
-              dot={false}
-              aria-label={`${dataKey} traffic data`}
-            />
+            <ChartTooltip cursor={false} content={<ChartTooltipContent />} />
+            {/* Loop through dataKeys to dynamically add lines */}
+            {dataKeys.map((dataKey) => (
+              <Line
+                key={dataKey}
+                dataKey={dataKey}
+                type="monotone"
+                stroke={chartConfig[dataKey]?.color || "black"} // Dynamically use color from config
+                strokeWidth={2}
+                dot={false}
+              />
+            ))}
           </LineChart>
         </ChartContainer>
       )}
@@ -113,4 +121,4 @@ function SingleLineChartComponent({
   );
 }
 
-export default SingleLineChartComponent;
+export default MultiLineChartComponent;
