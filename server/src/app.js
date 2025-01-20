@@ -57,10 +57,12 @@ async function sendPendingNotifications(userId) {
 //routes import
 import userRouter from './routes/user.routes.js'
 import healthcheckRouter from "./routes/healthcheck.routes.js"
+import whishlistRouter from "./routes/whishlist.routes.js"
 
 //routes declaration
 app.use("/api/v1/healthcheck", healthcheckRouter)
 app.use("/api/v1/users", userRouter)
+app.use("/api/v1/whishlist", whishlistRouter)
 
 // http://localhost:8000/api/v1/users/register
 

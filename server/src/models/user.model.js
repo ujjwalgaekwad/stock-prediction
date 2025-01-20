@@ -19,6 +19,13 @@ const userSchema = new Schema({
         trim: true,
         index: true
     },
+    wishlist: [
+        {
+            type: String,
+            required: true,
+            trim: true
+        }
+    ],
     fullName: {
         type: String,
         required: true,
