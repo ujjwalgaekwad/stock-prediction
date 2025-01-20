@@ -11,5 +11,5 @@ export {
   Header,
   Loading,
   Stepper,
-  DrawerMenu
+  DrawerMenu,
 }
