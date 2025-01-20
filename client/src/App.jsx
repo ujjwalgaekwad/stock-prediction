@@ -6,7 +6,6 @@ import axios from "axios";
 import { Header, HorizontalTabs, Loading } from "@/components/general";
 import { handleAxiosError } from "./utils/handlerAxiosError";
 import { initializeSocket } from "./utils/initializeSocket";
-import { syncRootTheme } from "./utils/themeMethods";
 
 const App = () => {
   const { setProfile, profile, setTheme } = useProfileStore();
@@ -51,17 +50,6 @@ const App = () => {
       }
     })();
 
-    // If you have a theme preference in user schema then fetch theme from user and then sync it with root element
-    // syncRootTheme(theme)
-
-    // or just sync system preference with root element each time user visits the site
-    if (
-      window.matchMedia &&
-      window.matchMedia("(prefers-color-scheme: dark)").matches
-    ) {
-      syncRootTheme("dark");
-      setTheme("dark");  // and then set that theme in profile state also
-    }
   }, [navigate, setProfile, setTheme]);
 
   const showBars =

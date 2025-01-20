@@ -3,7 +3,7 @@ import ProfileCard from "./ProfileCard";
 import { useState } from "react";
 import appName from "../../constants/appName";
 import { Input } from "../ui/input";
-import ThemeToggle from "./ThemeToggle";
+import ThemeToggler from "./ThemeToggler";
 
 const Header = () => {
   const [search, setSearch] = useState("");
@@ -55,7 +55,7 @@ const Header = () => {
           >
             Dashboard
           </NavLink>
-          <ThemeToggle />
+          <ThemeToggler />
           <div className="hidden lg:inline-block">
             <ProfileCard />
           </div>

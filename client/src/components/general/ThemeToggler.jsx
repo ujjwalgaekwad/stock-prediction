@@ -1,9 +1,9 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Moon, Sun } from "lucide-react";
 import useProfileStore from "../../store/profileStore";
 import { syncRootTheme } from "../../utils/themeMethods";
 
-const ThemeToggle = () => {
+const ThemeToggler = () => {
   const { profile, setTheme } = useProfileStore();
 
   const toggleTheme = () => {
@@ -11,6 +11,17 @@ const ThemeToggle = () => {
     setTheme(newTheme);
     syncRootTheme(newTheme);
   };
+
+  useEffect(() => {
+    if (
+      !profile?.theme &&
+      window.matchMedia &&
+      window.matchMedia("(prefers-color-scheme: dark)").matches
+    ) {
+      syncRootTheme("dark");
+      setTheme("dark"); // and then set that theme in profile state also
+    }
+  }, [profile?.theme, setTheme]);
 
   return (
     <button
@@ -26,4 +37,4 @@ const ThemeToggle = () => {
   );
 };
 
-export default ThemeToggle;
+export default ThemeToggler;
