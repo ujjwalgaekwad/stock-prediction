@@ -130,7 +130,7 @@ function DashboardPage() {
             defaultCard
             title="Adani vs Tata Motors vs Balaji Wafers"
             dataKeys={["adani", "tataMotors", "balaji"]}
-            className="bg-zinc-200 text-zinc-900 dark:bg-slate-950 dark:text-zinc-100 rounded-lg shadow overflow-hidden"
+            className="bg-zinc-200 text-zinc-900 dark:bg-zinc-950/40 dark:text-zinc-100 rounded-lg shadow overflow-hidden"
           />
         </div>
         <Separator className="my-8" />
@@ -145,7 +145,7 @@ function DashboardPage() {
             chartData={mockHistoricalData}
             title="Apple Stock Performance"
             dataKey="apple"
-            className="bg-zinc-200 text-zinc-900 dark:bg-slate-950 dark:text-zinc-100 rounded-lg shadow overflow-hidden"
+            className="bg-zinc-200 text-zinc-900 dark:bg-zinc-950/40 dark:text-zinc-100 rounded-lg shadow overflow-hidden"
           />
         </div>
 
