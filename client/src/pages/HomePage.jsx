@@ -1,10 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import useProfileStore from "../store/profileStore";
 import { MultiLineChart, SingleLineChart } from "../components/charts/index"; // Assuming these are pre-built components
 import { Separator } from "../components/ui/separator";
 import { MdArrowForwardIos } from "react-icons/md";
-import axios from "axios";
-import toast from "react-hot-toast";
+import WishlistCards from "../components/general/WishlistCards";
+import NewsCards from "../components/general/NewsCards";
 
 const mockWatchlist = [
   { name: "Apple", price: 150, change: 1.2 },
@@ -50,47 +50,15 @@ const chartData = [
   { month: "June", adani: 214, tataMotors: 140, balaji: 100 },
 ];
 
+// https://api.marketaux.com/v1/news/all?symbols=TSLA%2CAMZN%2CMSFT&filter_entities=true&language=en&api_token=1kYzkZadl9tXhQ29A9hY33uTwAX6aJonysLO3dB6
+
 function HomePage() {
   const { profile } = useProfileStore();
-
-  const [watchlist, setWishlist] = useState([]);
-  const [loading, setLoading] = useState(true);
 
   const totalPortfolioValue = mockWatchlist.reduce(
     (acc, stock) => acc + stock.price,
     0
-  );
-
-  useEffect(() => {
-    (async () => {
-      try {
-        setLoading(true);
-        const res = await axios.get(
-          `${import.meta.env.VITE_SERVER_API_URL}/whishlist/get`,
-          { withCredentials: true }
-        );
-
-        if (!res.data.success) {
-          return;
-        }
-
-        const watchlist = res.data.data.whishlist.map((item) => {
-          return {
-            name: item.name,
-            price: item.price,
-            change: item.change,
-          };
-        });
-
-        setWishlist(watchlist);
-      } catch (error) {
-        toast.error("Failed to get whishlist");
-        console.log(error);
-      } finally {
-        setLoading(false);
-      }
-    })();
-  }, []);
+  )
 
   return (
     <div className={`min-h-screen w-screen overflow-x-hidden`}>
@@ -143,43 +111,13 @@ function HomePage() {
         {/* Stock Watchlist */}
         <div className="mb-6">
           <h2 className="text-2xl font-semibold mb-4">Stock Watchlist</h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
-            {loading
-              ? Array.from({ length: 3 }).map((_, index) => (
-                  <div key={index} className="relative bg-zinc-200 dark:bg-zinc-800 border-1 p-4 rounded-lg shadow-lg animate-pulse">
-                    {/* Skeleton for stock name */}
-                    <div className="h-6 bg-zinc-300 dark:bg-zinc-700 rounded w-3/4 mb-4"></div>
-                    {/* Skeleton for stock price */}
-                    <div className="h-5 bg-zinc-300 dark:bg-zinc-700 rounded w-1/2 mb-4"></div>
-                    {/* Skeleton for stock change */}
-                    <div className="h-5 bg-zinc-300 dark:bg-zinc-700 rounded w-1/4 mb-4"></div>
-                    {/* Skeleton for arrow icon */}
-                    <div className="absolute right-6 top-0 h-full flex items-center">
-                      <div className="h-6 w-6 bg-zinc-300 dark:bg-zinc-700 rounded-full"></div>
-                    </div>
-                  </div>
-                ))
-              : watchlist?.map((stock) => (
-                  <div
-                    key={stock.name}
-                    className="relative group bg-zinc-200 dark:bg-zinc-800 border-1 cursor-pointer border-transparent hover:border-zinc-300 dark:hover:border-zinc-700 p-4 rounded-lg shadow-lg hover:shadow-xl transition-shadow"
-                  >
-                    <h3 className="text-xl">{stock.name}</h3>
-                    <p className="text-lg">${stock.price}</p>
-                    <p
-                      className={
-                        stock.change > 0 ? "text-green-500" : "text-red-500"
-                      }
-                    >
-                      {stock.change > 0 ? "+" : ""}
-                      {stock.change}%
-                    </p>
-                    <div className="absolute opacity-0 group-hover:opacity-100 transition-opacity duration-200 right-6 top-0 h-full flex items-center">
-                      <MdArrowForwardIos className="text-2xl text-zinc-700 dark:text-zinc-300" />
-                    </div>
-                  </div>
-                ))}
-          </div>
+          <WishlistCards />
+        </div>
+
+        {/* Stock news */}
+        <div className="mb-6">
+          <h2 className="text-2xl font-semibold mb-4">Stock Market News</h2>
+          <NewsCards />
         </div>
 
         <Separator className="my-8" />
