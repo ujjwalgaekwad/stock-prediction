@@ -11,6 +11,7 @@ import SignupPage from "./pages/SignupPage.jsx";
 import PasswordRecoveryPage from "./pages/PasswordRecoveryPage.jsx";
 import NotFound from "./pages/NotFound.jsx";
 import Dashboard from "./pages/Dashboard.jsx";
+import { ThemeProvider } from "./context/ThemeContext.jsx";
 
 // router
 const router = createBrowserRouter([
@@ -42,12 +43,14 @@ const router = createBrowserRouter([
         path: "*",
         element: <NotFound />,
       },
-    ]
+    ],
   },
 ]);
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    <RouterProvider router={router} />
+    <ThemeProvider>
+      <RouterProvider router={router} />
+    </ThemeProvider>
   </React.StrictMode>
 );
