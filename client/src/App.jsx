@@ -63,7 +63,7 @@ const App = () => {
   }
 
   return (
-    <div className="min-h-screen w-screen text-zinc-900 dark:text-zinc-100 bg-zinc-100 dark:bg-zinc-900">
+    <div className="min-h-screen w-screen text-zinc-900 dark:text-zinc-100 bg-gray-200  dark:bg-zinc-900">
       <div
         className={`p-0 w-full min-h-[calc(100vh-env(safe-area-inset-top))]`}
       >
