@@ -55,18 +55,18 @@ function SearchBox() {
   };
 
   return (
-    <div className="lg:h-20 h-[4.5rem] lg:py-5 pt-4 pb-[1rem] flex space-x-2 md:w-2/5">
+    <div className="lg:h-20 h-[4.5rem] lg:py-5 pt-4 pb-[1rem] flex space-x-2 md:w-72">
       <div className="w-full relative hidden md:inline-block">
         <Input
           value={search}
           onChange={(e) => setSearch(e.target.value)} // Update search on input change
-          placeholder="Search something..."
+          placeholder="Search for a company"
           defaultStyling={false}
           className="bg-zinc-200 text-zinc-900 dark:bg-zinc-800 dark:text-zinc-100"
         />
-        <div className="absolute top-2 right-2 border-1 text-zinc-900 bg-zinc-200 border-zinc-400 dark:bg-zinc-900 dark:border-zinc-800 dark:text-zinc-300 w-fit py-1 px-2 text-xs rounded-md">
+        {/* <div className="absolute top-2 right-2 border-1 text-zinc-900 bg-zinc-200 border-zinc-400 dark:bg-zinc-900 dark:border-zinc-800 dark:text-zinc-300 w-fit py-1 px-2 text-xs rounded-md">
           ⌘K
-        </div>
+        </div> */}
 
         {/* Display search results below the input field */}
         {search && (

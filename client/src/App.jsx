@@ -7,6 +7,7 @@ import { Header, HorizontalTabs, Loading } from "@/components/general";
 import { handleAxiosError } from "./utils/handlerAxiosError";
 import { initializeSocket } from "./utils/initializeSocket";
 
+
 const App = () => {
   const { setProfile, profile, setTheme } = useProfileStore();
 

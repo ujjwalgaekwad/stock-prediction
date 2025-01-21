@@ -13,6 +13,9 @@ import NotFound from "./pages/NotFound.jsx";
 import WhishlistPage from "./pages/WhishlistPage.jsx";
 import StockDetailsPage from "./pages/StockDetailsPage.jsx";
 
+//Context 
+import { StocksProvider } from "./context/StocksContext";
+
 // router
 const router = createBrowserRouter([
   {
@@ -53,6 +56,8 @@ const router = createBrowserRouter([
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    <RouterProvider router={router} />
+    <StocksProvider>
+      <RouterProvider router={router} />
+    </StocksProvider>
   </React.StrictMode>
 );

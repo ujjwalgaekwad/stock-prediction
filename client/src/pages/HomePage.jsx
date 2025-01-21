@@ -1,11 +1,14 @@
-import React from "react";
+import React, { useContext } from "react";
 import useProfileStore from "../store/profileStore";
 import { MultiLineChart, SingleLineChart } from "../components/charts/index"; // Assuming these are pre-built components
 import { Separator } from "../components/ui/separator";
 import { MdArrowForwardIos } from "react-icons/md";
 import WishlistCards from "../components/general/WishlistCards";
-import NewsCards from "../components/general/NewsCards";
-
+import GraphContext from "../context/GraphContext";
+import { StockContext } from "../context/StocksContext";
+import News from "../components/general/News";
+import Company from "../components/general/Company";
+import Chart from "../components/general/Chart";
 const mockWatchlist = [
   { name: "Apple", price: 150, change: 1.2 },
   { name: "Tesla", price: 650, change: -0.5 },
@@ -53,6 +56,8 @@ const chartData = [
 // https://api.marketaux.com/v1/news/all?symbols=TSLA%2CAMZN%2CMSFT&filter_entities=true&language=en&api_token=1kYzkZadl9tXhQ29A9hY33uTwAX6aJonysLO3dB6
 
 function HomePage() {
+  const { searchData, setUpdateSearchData, stockName, setStockName, stockPrice, setStockPrive } = useContext(StockContext);
+
   const { profile } = useProfileStore();
 
   const totalPortfolioValue = mockWatchlist.reduce(
@@ -66,12 +71,12 @@ function HomePage() {
         <h1 className="text-3xl font-bold">
           Hello, {profile.fullName.split(" ")[0]}!
         </h1>
-        <p className="mb-6">Welcome to your stock market dashboard.</p>
+        <p className="mb-6 text-gray-600">Welcome to your stock market dashboard.</p>
 
         {/* Portfolio Overview */}
-        <div className="mb-6">
+        {/* <div className="mb-6">
           <h2 className="text-2xl font-semibold mb-4">Portfolio Overview</h2>
-          <div className="relative group bg-zinc-200 dark:bg-zinc-800 border-1 cursor-pointer border-transparent hover:border-zinc-300 dark:hover:border-zinc-700 p-6 rounded-lg shadow-lg">
+          <div className="relative group bg-white dark:bg-zinc-800 cursor-pointer hover:border-gray-200 dark:hover:border-zinc-700 p-6 rounded-lg shadow-md">
             <p className="text-xl">
               Total Portfolio Value: ${totalPortfolioValue}
             </p>
@@ -79,16 +84,16 @@ function HomePage() {
               <MdArrowForwardIos className="text-2xl text-zinc-700 dark:text-zinc-300" />
             </div>
           </div>
-        </div>
-
+        </div> */}
+        
         {/* Market Overview */}
         <div className="mb-6">
           <h2 className="text-2xl font-semibold mb-4">Market Overview</h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          {/* <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             {marketOverview.map((market) => (
               <div
                 key={market.index}
-                className="relative group bg-zinc-200 dark:bg-zinc-800 border-1 cursor-pointer border-transparent hover:border-zinc-300 dark:hover:border-zinc-700 p-4 rounded-lg shadow-lg hover:shadow-xl transition-shadow"
+                className="relative group bg-white dark:bg-zinc-800 border-1 cursor-pointer border-transparent hover:border-zinc-300 dark:hover:border-zinc-700 p-4 rounded-lg shadow-md hover:shadow-xl transition-shadow"
               >
                 <h3 className="text-xl">{market.index}</h3>
                 <p className="text-lg">${market.value}</p>
@@ -105,7 +110,9 @@ function HomePage() {
                 </div>
               </div>
             ))}
-          </div>
+            
+          </div> */}
+          <Company />
         </div>
 
         {/* Stock Watchlist */}
@@ -116,47 +123,38 @@ function HomePage() {
 
         {/* Stock news */}
         <div className="mb-6">
-          <h2 className="text-2xl font-semibold mb-4">Stock Market News</h2>
-          <NewsCards />
+          <News />
         </div>
 
         <Separator className="my-8" />
         {/* MultiLineChart Component */}
         <div className="mb-6">
-          <MultiLineChart
+          {/* <MultiLineChart
             chartConfig={chartConfig}
             chartData={chartData}
             defaultCard
             title="Adani vs Tata Motors vs Balaji Wafers"
             dataKeys={["adani", "tataMotors", "balaji"]}
             className="bg-zinc-200 text-zinc-900 dark:bg-zinc-950/40 dark:text-zinc-100 rounded-lg shadow overflow-hidden"
-          />
+          /> */}
         </div>
-        <Separator className="my-8" />
+        {/* <Separator className="my-8" /> */}
 
         {/* Historical Performance (Single Line Chart) */}
-        <div className="mb-6">
-          <SingleLineChart
-            chartConfig={{
-              apple: { label: "Apple", color: "hsl(var(--chart-1))" },
-            }}
-            defaultCard
-            chartData={mockHistoricalData}
-            title="Apple Stock Performance"
-            dataKey="apple"
-            className="bg-zinc-200 text-zinc-900 dark:bg-zinc-950/40 dark:text-zinc-100 rounded-lg shadow overflow-hidden"
-          />
+        <div className="mb-6 p-4 rounded-lg shadow-lg bg-white dark:bg-gray-800">
+          
+          {/* <GraphContext /> */}
+          <Chart />
         </div>
-
         {/* Predictions Accuracy */}
         <div className="mb-6">
           <h2 className="text-2xl font-semibold mb-4">Predictions Accuracy</h2>
-          <div className="group bg-zinc-200 dark:bg-zinc-800 p-6 rounded-lg shadow-lg">
+          <div className="group bg-white dark:bg-zinc-800 p-6 rounded-lg shadow-lg">
             <div className="flex justify-center items-center w-fit space-x-2">
               <p className="text-xl">Prediction Accuracy: 85%</p>
               {/* <MdArrowForwardIos className="text-lg text-zinc-700 dark:text-zinc-300 opacity-0 group-hover:opacity-100 transition-opacity duration-200" /> */}
             </div>
-            <div className="w-full bg-zinc-300 dark:bg-zinc-600 rounded-full h-2 mt-2">
+            <div className="w-full bg-white dark:bg-zinc-600 rounded-full h-2 mt-2">
               <div
                 className="bg-green-500 h-2 rounded-full"
                 style={{ width: "85%" }}
